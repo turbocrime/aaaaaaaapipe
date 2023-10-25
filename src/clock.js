@@ -8,8 +8,7 @@ window.onload = function () {
 	const audio = document.querySelector('.audio');
 
 
-	window.fakeSeconds = 60 * 60 * 12 - 10;
-	//	setInterval(() => window.fakeSeconds++, 1000);
+	window.fakeSeconds = 0;
 
 	function setDate() {
 
