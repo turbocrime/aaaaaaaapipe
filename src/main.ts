@@ -202,10 +202,11 @@ function drawBlendShapes(el: HTMLElement, blendShapes: any[]) {
 function computeAndDisplayLookingAtScreenStats(faceBlendshapes) {
   const blinkRight = faceBlendshapes[0].categories[9].score;
   const blinkLeft = faceBlendshapes[0].categories[10].score;
-  console.log({ blinkRight, blinkLeft })
 
-  let rateFactor = blinkRight + blinkLeft - 0.2;
-  window.fakeSeconds += Math.max(0, rateFactor / 5)
+  const rateFactor = (blinkRight + blinkLeft) / 2;
+  const scaled = Math.pow(Math.max(0, rateFactor - 0.1), 3);
+  console.log({ scaled, rateFactor, blinkRight, blinkLeft })
+  window.fakeSeconds += Math.max(0, scaled * 120)
   console.log("tick", rateFactor, window.fakeSeconds)
 }
 
