@@ -24,26 +24,24 @@ let enableWebcamButton: HTMLButtonElement;
 let webcamRunning: Boolean = false;
 const videoWidth = 480;
 
-let seconds =
-
-  // Before we can use HandLandmarker class we must wait for it to finish
-  // loading. Machine Learning models can be large and take a moment to
-  // get everything needed to run.
-  async function createFaceLandmarker() {
-    const filesetResolver = await FilesetResolver.forVisionTasks(
-      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
-    );
-    faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
-      baseOptions: {
-        modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
-        delegate: "GPU"
-      },
-      outputFaceBlendshapes: true,
-      runningMode,
-      numFaces: 1
-    });
-    demosSection.classList.remove("invisible");
-  }
+// Before we can use HandLandmarker class we must wait for it to finish
+// loading. Machine Learning models can be large and take a moment to
+// get everything needed to run.
+async function createFaceLandmarker() {
+  const filesetResolver = await FilesetResolver.forVisionTasks(
+    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+  );
+  faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+    baseOptions: {
+      modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+      delegate: "GPU"
+    },
+    outputFaceBlendshapes: true,
+    runningMode,
+    numFaces: 1
+  });
+  demosSection.classList.remove("invisible");
+}
 createFaceLandmarker();
 
 
@@ -207,5 +205,6 @@ function computeAndDisplayLookingAtScreenStats(faceBlendshapes) {
   const blinkLeft = faceBlendshapes[10];
 
   const rateFactor = blinkRight + blinkLeft;
-  seconds = rateFactor * seconds * 1000;
+  window.fakeSeconds = rateFactor * window.fakeSeconds * 1000;
+  console.log(window.fakeSeconds)
 }
