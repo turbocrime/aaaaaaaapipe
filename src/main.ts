@@ -201,10 +201,15 @@ function drawBlendShapes(el: HTMLElement, blendShapes: any[]) {
 }
 
 function computeAndDisplayLookingAtScreenStats(faceBlendshapes) {
-  const blinkRight = faceBlendshapes[9];
-  const blinkLeft = faceBlendshapes[10];
+  const blinkRight = faceBlendshapes[0].categories[9].score;
+  const blinkLeft = faceBlendshapes[0].categories[10].score;
+  console.log({ blinkRight, blinkLeft })
 
   const rateFactor = blinkRight + blinkLeft;
-  window.fakeSeconds = rateFactor * window.fakeSeconds * 1000;
-  console.log(window.fakeSeconds)
+  window.fakeSeconds += rateFactor / 10;
+  console.log("tick", rateFactor, window.fakeSeconds)
 }
+
+setInterval(() => {
+  window.fakeSeconds++;
+}, 1000)

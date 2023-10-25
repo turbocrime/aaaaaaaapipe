@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = function () {
 
 	const hourHand = document.querySelector('.hourHand');
 	const minuteHand = document.querySelector('.minuteHand');
@@ -14,17 +14,17 @@ window.onload = function() {
 	function setDate() {
 
 		//const second = today.getSeconds();
-		const second = window.fakeSeconds;
+		const second = Math.floor(window.fakeSeconds);
 		const secondDeg = ((second / 60) * 360) + 360;
 		secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
 
 		//const minute = today.getMinutes();
-		const minute = second % 60;
+		const minute = Math.floor(second / 60);
 		const minuteDeg = ((minute / 60) * 360);
 		minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
 
-		const hour = second % 60 % 60 % 12;
+		const hour = Math.floor(minute / 60) % 12;
 		const hourDeg = ((hour / 12) * 360);
 		hourHand.style.transform = `rotate(${hourDeg}deg)`;
 
@@ -32,5 +32,5 @@ window.onload = function() {
 
 	}
 
-	setInterval(setDate, 1000);
+	setInterval(setDate, 100);
 }
