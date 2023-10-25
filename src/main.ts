@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    fakeSeconds: number;
+  }
+}
+
 // Copyright 2023 The MediaPipe Authors.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
