@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+import vision from "@mediapipe/tasks-vision";
 const { FaceLandmarker, FilesetResolver, DrawingUtils } = vision;
 const demosSection = document.getElementById("demos");
 const imageBlendShapes = document.getElementById("image-blend-shapes");
