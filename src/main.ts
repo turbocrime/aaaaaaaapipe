@@ -171,6 +171,8 @@ async function predictWebcam() {
   }
   drawBlendShapes(videoBlendShapes, results.faceBlendshapes);
 
+  console.table(FaceLandmarker);
+
   // Call this function again to keep predicting when the browser is ready.
   if (webcamRunning === true) {
     window.requestAnimationFrame(predictWebcam);
