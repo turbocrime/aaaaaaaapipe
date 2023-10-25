@@ -21,26 +21,19 @@ limitations under the License. -->
   <title>Face Landmarker</title>
 
   <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <link href="/src/style.css" rel="stylesheet">
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   <script type="module" src="/src/main.ts"></script>
   <link href="/src/style.css" rel="stylesheet">
+  <link href="/src/clock.css" rel="stylesheet">
+  <script src="/src/clock.js"></script>
+
 </head>
 
 <body>
   <h1>Face landmark detection using the MediaPipe FaceLandmarker task</h1>
 
   <section id="demos" class="invisible">
-    <h2>Demo: Detecting Images</h2>
-    <p><b>Click on an image below</b> to see the key landmarks of the face.</p>
-
-    <div class="detectOnClick">
-      <img src="https://storage.googleapis.com/mediapipe-assets/portrait.jpg" width="100%" crossorigin="anonymous"
-        title="Click to get detection!" />
-    </div>
-    <div class="blend-shapes">
-      <ul class="blend-shapes-list" id="image-blend-shapes"></ul>
-    </div>
-
     <h2>Demo: Webcam continuous face landmarks detection</h2>
     <p>Hold your face in front of your webcam to get real-time face landmarker detection.</br>Click <b>enable webcam</b>
       below and grant access to the webcam if prompted.</p>
@@ -59,6 +52,27 @@ limitations under the License. -->
       <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
     </div>
   </section>
+    <div class="clock">
+        <div class="hourHand"></div>
+        <div class="minuteHand"></div>
+        <div class="secondHand"></div>
+        <div class="center"></div>
+        <div class="time"></div>
+        <ul>
+            <li><span>1</span></li>
+            <li><span>2</span></li>
+            <li><span>3</span></li>
+            <li><span>4</span></li>
+            <li><span>5</span></li>
+            <li><span>6</span></li>
+            <li><span>7</span></li>
+            <li><span>8</span></li>
+            <li><span>9</span></li>
+            <li><span>10</span></li>
+            <li><span>11</span></li>
+            <li><span>12</span></li>
+        </ul>
+    </div>
 </body>
 
 </html>
