@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "tsc && vite build && fly deploy"
+    "fly": "tsc && vite build && fly deploy"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.4.10",
