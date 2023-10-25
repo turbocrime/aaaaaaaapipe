@@ -31,5 +31,5 @@ window.onload = function () {
 
 	}
 
-	setInterval(setDate, 10);
+	setInterval(setDate, 42);
 }
