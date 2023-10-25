@@ -26,7 +26,7 @@ limitations under the License. -->
   <script type="module" src="/src/main.ts"></script>
   <link href="/src/style.css" rel="stylesheet">
   <link href="/src/clock.css" rel="stylesheet">
-  <script src="/src/clock.js"></script>
+  <script type="module" src="/src/clock.js"></script>
 
 </head>
 
@@ -34,6 +34,7 @@ limitations under the License. -->
   <h1>Face landmark detection using the MediaPipe FaceLandmarker task</h1>
 
   <section id="demos" class="invisible">
+    <h2>dont blink</h2>
 
     <div id="liveView" class="videoView">
       <button id="webcamButton" class="mdc-button mdc-button--raised">
@@ -49,6 +50,8 @@ limitations under the License. -->
       <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
     </div>
   </section>
+  <div id="testNumber">
+  </div>
   <div class="clock">
     <div class="hourHand"></div>
     <div class="minuteHand"></div>

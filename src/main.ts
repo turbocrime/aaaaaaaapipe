@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    fakeSeconds: number;
+  }
+}
+
 // Copyright 2023 The MediaPipe Authors.
 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,21 +62,14 @@ const canvasElement = document.getElementById(
 
 const canvasCtx = canvasElement.getContext("2d");
 
-// Check if webcam access is supported.
-function hasGetUserMedia() {
-  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-}
-
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
-if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById(
-    "webcamButton"
-  ) as HTMLButtonElement;
-  enableWebcamButton.addEventListener("click", enableCam);
-} else {
-  console.warn("getUserMedia() is not supported by your browser");
-}
+enableWebcamButton = document.getElementById(
+  "webcamButton"
+) as HTMLButtonElement;
+enableWebcamButton.addEventListener("click", enableCam);
+setTimeout(() => {
+  console.log("clicking", enableWebcamButton)
+  enableWebcamButton.click();
+}, 1000);
 
 // Enable the live webcam view and start detection.
 function enableCam(event) {
@@ -121,6 +120,7 @@ async function predictWebcam() {
     results = faceLandmarker.detectForVideo(video, startTimeMs);
   }
   if (results.faceLandmarks) {
+    computeAndDisplayLookingAtScreenStats(results.faceBlendshapes);
     for (const landmarks of results.faceLandmarks) {
       drawingUtils.drawConnectors(
         landmarks,
@@ -171,8 +171,6 @@ async function predictWebcam() {
   }
   drawBlendShapes(videoBlendShapes, results.faceBlendshapes);
 
-  console.table(FaceLandmarker);
-
   // Call this function again to keep predicting when the browser is ready.
   if (webcamRunning === true) {
     window.requestAnimationFrame(predictWebcam);
@@ -184,7 +182,7 @@ function drawBlendShapes(el: HTMLElement, blendShapes: any[]) {
     return;
   }
 
-  console.log(blendShapes[0]);
+  //console.log(blendShapes[0]);
 
   let htmlMaker = "";
   blendShapes[0].categories.map((shape) => {
@@ -200,3 +198,17 @@ function drawBlendShapes(el: HTMLElement, blendShapes: any[]) {
 
   el.innerHTML = htmlMaker;
 }
+
+function computeAndDisplayLookingAtScreenStats(faceBlendshapes) {
+  const blinkRight = faceBlendshapes[0].categories[9].score;
+  const blinkLeft = faceBlendshapes[0].categories[10].score;
+  console.log({ blinkRight, blinkLeft })
+
+  let rateFactor = blinkRight + blinkLeft - 0.2;
+  window.fakeSeconds += Math.max(0, rateFactor / 5)
+  console.log("tick", rateFactor, window.fakeSeconds)
+}
+
+setInterval(() => {
+  window.fakeSeconds++;
+}, 1000)
