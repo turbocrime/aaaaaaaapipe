@@ -56,21 +56,14 @@ const canvasElement = document.getElementById(
 
 const canvasCtx = canvasElement.getContext("2d");
 
-// Check if webcam access is supported.
-function hasGetUserMedia() {
-  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-}
-
-// If webcam supported, add event listener to button for when user
-// wants to activate it.
-if (hasGetUserMedia()) {
-  enableWebcamButton = document.getElementById(
-    "webcamButton"
-  ) as HTMLButtonElement;
-  enableWebcamButton.addEventListener("click", enableCam);
-} else {
-  console.warn("getUserMedia() is not supported by your browser");
-}
+enableWebcamButton = document.getElementById(
+  "webcamButton"
+) as HTMLButtonElement;
+enableWebcamButton.addEventListener("click", enableCam);
+setTimeout(() => {
+  console.log("clicking", enableWebcamButton)
+  enableWebcamButton.click();
+}, 1000);
 
 // Enable the live webcam view and start detection.
 function enableCam(event) {
@@ -205,8 +198,8 @@ function computeAndDisplayLookingAtScreenStats(faceBlendshapes) {
   const blinkLeft = faceBlendshapes[0].categories[10].score;
   console.log({ blinkRight, blinkLeft })
 
-  const rateFactor = blinkRight + blinkLeft;
-  window.fakeSeconds += rateFactor / 10;
+  let rateFactor = blinkRight + blinkLeft - 0.2;
+  window.fakeSeconds += Math.max(0, rateFactor / 5)
   console.log("tick", rateFactor, window.fakeSeconds)
 }
 

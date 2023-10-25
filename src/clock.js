@@ -15,7 +15,7 @@ window.onload = function () {
 
 		//const second = today.getSeconds();
 		const second = Math.floor(window.fakeSeconds);
-		const secondDeg = ((second / 60) * 360) + 360;
+		const secondDeg = (((second % 60) / 60) * 360) + 360;
 		secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
 
